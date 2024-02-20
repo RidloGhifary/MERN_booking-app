@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import * as apiClient from "../api-client";
@@ -13,6 +13,8 @@ export type RegisterFormData = {
 };
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     watch,
@@ -26,6 +28,7 @@ const Register = () => {
         icon: "success",
         title: "Registration successfully",
       });
+      navigate("/");
       // console.log("registration successful");
     },
     onError: (error: Error) => {
