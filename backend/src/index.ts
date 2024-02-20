@@ -1,22 +1,24 @@
-import express,{Request, Response} from "express"
-import cors from "cors"
-import "dotenv/config"
-import mongoose from 'mongoose';
+import express, { Request, Response } from "express";
+import cors from "cors";
+import "dotenv/config";
+import mongoose from "mongoose";
 
-import userRoutes from "./router/users"
+import userRoutes from "./router/users";
 
-const app = express()
+const app = express();
 
-mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string)
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
 
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-app.use(cors())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
-app.use("/api/users", userRoutes)
+app.use("/api/users", userRoutes);
 
-app.get("/api/test",async(req:Request,res:Response)=>{
-  res.json({message:"Hello from backend"})
-})
+app.get("/api/test", async (req: Request, res: Response) => {
+  res.json({ message: "Hello from backend" });
+});
 
-app.listen(5000, ()=>{console.log("Connected...")})
+app.listen(5000, () => {
+  console.log("Connected...");
+});
