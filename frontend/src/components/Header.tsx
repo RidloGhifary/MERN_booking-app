@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
 import { TypeAnimation } from "react-type-animation";
+import SignOutButton from "./SignOutButton";
 
 const Header = () => {
   const { isLoggedIn } = useAppContext();
@@ -40,14 +41,12 @@ const Header = () => {
                 className="bg-white text-blue-700 cursor-pointer px-5 py-2 hover:bg-white/90">
                 My Hotels
               </Link>
-              <button className="px-5 py-2 cursor-pointer bg-rose-500 text-white">
-                Sign out
-              </button>
+              <SignOutButton />
             </>
           ) : (
             <Link
               to="/sign-in"
-              className="bg-white text-blue-700 cursor-pointer px-5 py-2 hover:bg-blue-700/70">
+              className="bg-white text-blue-700 cursor-pointer px-5 py-2 hover:bg-white/90">
               Sign In
             </Link>
           )}
