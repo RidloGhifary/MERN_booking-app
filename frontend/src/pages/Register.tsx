@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import * as apiClient from "../api-client";
-import Swal from "sweetalert2";
+import { Toast } from "../components/Toast";
 
 export type RegisterFormData = {
   firstName: string;
@@ -11,18 +11,6 @@ export type RegisterFormData = {
   password: string;
   confirmPassword: string;
 };
-
-const Toast = Swal.mixin({
-  toast: true,
-  position: "top-end",
-  showConfirmButton: false,
-  timer: 2000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.onmouseenter = Swal.stopTimer;
-    toast.onmouseleave = Swal.resumeTimer;
-  },
-});
 
 const Register = () => {
   const {
