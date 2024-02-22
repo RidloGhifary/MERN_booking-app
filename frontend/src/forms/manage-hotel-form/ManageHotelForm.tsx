@@ -18,13 +18,36 @@ export type HotelFormData = {
   imageFiles: FileList;
 };
 
-const ManageHotelForm = () => {
+type Props = {
+  onSave: (hotelFormData: FormData) => void;
+  isLoading: boolean;
+};
+
+const ManageHotelForm = ({ onSave, isLoading }: Props) => {
   const formMethod = useForm<HotelFormData>();
   const { handleSubmit } = formMethod;
 
-  const onSubmit = handleSubmit((formData: HotelFormData) => {
+  const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
     // TODO - Create new FormData object & call API
-    console.log(formData);
+    const formData = new FormData();
+    formData.append("name", formDataJson.name);
+    formData.append("city", formDataJson.city);
+    formData.append("description", formDataJson.description);
+    formData.append("type", formDataJson.type);
+    formData.append("pricePerNight", formDataJson.pricePerNight.toString());
+    formData.append("starRating", formDataJson.starRating.toString());
+    formData.append("adultCount", formDataJson.adultCount.toString());
+    formData.append("childCount", formDataJson.childCount.toString());
+
+    formDataJson.facilities.forEach((facility, index) => {
+      formData.append(`facilities[${index}]`, facility);
+    });
+
+    Array.from(formDataJson.imageFiles).forEach((imageFile) => {
+      formData.append("imageFiles", imageFile);
+    });
+
+    onSave(formData);
   });
 
   return (
@@ -39,9 +62,10 @@ const ManageHotelForm = () => {
         <ImageSection />
         <span className="flex justify-end">
           <button
+            disabled={isLoading}
             type="submit"
-            className="text-lg bg-blue-700 text-white px-6 py-2 hover:bg-blue-700/70 transition cursor-pointer">
-            Save my hotel
+            className="text-lg bg-blue-700 text-white px-6 py-2 hover:bg-blue-700/70 transition cursor-pointer disabled:bg-blue-500">
+            {isLoading ? "Loading..." : "Save My Hotel"}
           </button>
         </span>
       </form>

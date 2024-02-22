@@ -96,7 +96,7 @@ const DetailSection = () => {
           <label
             className="block text-grey-darker text-sm font-bold mb-2"
             htmlFor="starRating">
-            Price per night
+            Rating
           </label>
           <select
             id="starRating"
