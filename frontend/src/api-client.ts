@@ -1,8 +1,10 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
+import { HotelType } from "../../backend/src/models/hotel";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
+// ! - USER STUFF
 export const signIn = async (formData: SignInFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
     method: "POST",
@@ -53,6 +55,7 @@ export const signOut = async () => {
   if (!response.ok) throw new Error("Error during sign out");
 };
 
+// ! - HOTEL STUFF
 export const addMyHotel = async (hotelFormData: FormData) => {
   const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
     method: "POST",
@@ -63,4 +66,15 @@ export const addMyHotel = async (hotelFormData: FormData) => {
   if (!response.ok) throw new Error("Error during saving hotel");
 
   return response.json();
+};
+
+export const fetchMyHotels = async (): Promise<HotelType[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!response.ok) throw new Error("Error fetching hotels");
+
+  return await response.json();
 };
