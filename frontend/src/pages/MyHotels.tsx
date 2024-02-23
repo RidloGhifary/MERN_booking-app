@@ -4,6 +4,7 @@ import * as apiClient from "../api-client";
 import { Toast } from "../components/Toast";
 import { BsBuilding, BsMap } from "react-icons/bs";
 import { BiHotel, BiMoney, BiStar } from "react-icons/bi";
+import { rupiah } from "../config/rupiah-format";
 
 const MyHotels = () => {
   const { data: hotelDatas } = useQuery(
@@ -18,13 +19,6 @@ const MyHotels = () => {
       },
     }
   );
-
-  const rupiah = (number: number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-    }).format(number);
-  };
 
   return (
     <div className="space-y-5">
