@@ -77,7 +77,7 @@ const MyHotels = () => {
               </div>
               <span className="flex justify-end">
                 <Link
-                  to={`/edit-hotel/${hotel._id}`}
+                  to={`/edit-hotel/${hotel._id}?name=${hotel.name}`}
                   className="flex bg-blue-700 text-white px-5 py-2 hover:bg-blue-700/70 transition">
                   View Details
                 </Link>
