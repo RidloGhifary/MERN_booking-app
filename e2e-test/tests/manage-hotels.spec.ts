@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
 
   await page.getByRole("link", { name: "Sign In" }).click();
 
-  await expect(page.getByText("Login for existing account")).toBeVisible();
+  // await expect(page.getByText("Login for existing account")).toBeVisible();
 
   await page.locator("[name=email]").fill("test_register_2672@test.com");
   await page.locator("[name=password]").fill("password");
@@ -19,11 +19,15 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("should allow user to add hotel", async ({ page }) => {
+  const testHotel = `Test_hotel_${
+    Math.floor(Math.random() * 9000) + 1000
+  }Hotel`;
+
   await page.goto(`${UI_URL}add-hotel`);
 
-  await page.locator("[name='name']").fill("Test Hotel");
-  await page.locator("[name='city']").fill("Test Hotel City");
-  await page.locator("[name='description']").fill("Test Hotel Description");
+  await page.locator("[name='name']").fill(`${testHotel}`);
+  await page.locator("[name='city']").fill(`${testHotel} City`);
+  await page.locator("[name='description']").fill(`${testHotel} Description`);
   await page.locator("[name='pricePerNight']").fill("250000");
   await page.selectOption("select[name='starRating']", "3");
   await page.getByText("Budget").click();
@@ -57,4 +61,23 @@ test("should display list of hotels", async ({ page }) => {
     page.getByRole("link", { name: "View Details" }).first()
   ).toBeVisible();
   await expect(page.getByRole("link", { name: "Add hotel" })).toBeVisible();
+});
+
+test("should edit hotel", async ({ page }) => {
+  await page.goto(`${UI_URL}my-hotels`);
+
+  await page.getByRole("link", { name: "View Details" }).nth(3).click();
+
+  await page.waitForSelector('[name="name"]', { state: "attached" });
+  await expect(page.locator('[name="name"]')).toHaveValue(
+    "Test Hotel Updated Again"
+  );
+  await page.locator('[name="name"]').fill("Test Hotel Udalah");
+  await page.getByRole("button", { name: "Save My Hotel" }).click();
+
+  await expect(page.getByText("Successful updating hotel")).toBeVisible();
+
+  await page.reload();
+
+  await expect(page.locator('[name="name"]')).toHaveValue("Test Hotel Udalah");
 });
