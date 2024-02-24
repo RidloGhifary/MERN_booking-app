@@ -112,6 +112,11 @@ export type SearchParams = {
   checkIn?: string;
   checkOut?: string;
   page?: string;
+  facilities?: string[];
+  types?: string[];
+  stars?: string[];
+  maxPrice?: string;
+  sortOption?: string;
 };
 
 export const searchHotels = async (
@@ -125,6 +130,15 @@ export const searchHotels = async (
   queryParams.append("childCount", searchParams.childCount || "");
   queryParams.append("page", searchParams.page || "");
 
+  queryParams.append("maxPrice", searchParams.maxPrice || "");
+  queryParams.append("sortOption", searchParams.sortOption || "");
+
+  searchParams.facilities?.forEach((facility) =>
+    queryParams.append("facilities", facility)
+  );
+  searchParams.types?.forEach((type) => queryParams.append("types", type));
+  searchParams.stars?.forEach((star) => queryParams.append("stars", star));
+
   const response = await fetch(
     `${API_BASE_URL}/api/hotels/search?${queryParams}`
   );
@@ -132,4 +146,21 @@ export const searchHotels = async (
   if (!response.ok) throw new Error("Error fetching hotels");
 
   return await response.json();
+};
+
+// export const fetchHotels = async (): Promise<HotelType[]> => {
+//   const response = await fetch(`${API_BASE_URL}/api/hotels`);
+//   if (!response.ok) {
+//     throw new Error("Error fetching hotels");
+//   }
+//   return response.json();
+// };
+
+export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
+  const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}`);
+  if (!response.ok) {
+    throw new Error("Error fetching Hotels");
+  }
+
+  return response.json();
 };
