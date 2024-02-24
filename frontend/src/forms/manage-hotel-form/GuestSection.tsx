@@ -22,7 +22,7 @@ const GuestSection = () => {
             id="adults"
             type="number"
             min={1}
-            placeholder="Your hotel price per night"
+            placeholder="Adults"
             {...register("adultCount", {
               required: "This field is required and 1 is minimum",
             })}
@@ -42,7 +42,7 @@ const GuestSection = () => {
             id="child"
             type="number"
             min={1}
-            placeholder="Your hotel price per night"
+            placeholder="Children"
             {...register("childCount", {
               required: "This field is required and 1 is minimum",
             })}
