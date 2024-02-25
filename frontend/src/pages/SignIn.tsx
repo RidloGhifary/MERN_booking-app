@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as apiClient from "../api-client";
 import { Toast } from "../components/Toast";
 
@@ -11,6 +11,7 @@ export type SignInFormData = {
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     register,
@@ -24,7 +25,7 @@ const SignIn = () => {
         icon: "success",
         title: "Sign In Successful",
       });
-      navigate("/");
+      navigate(location.state?.from.pathname || "/");
     },
     onError: (error: Error) => {
       console.log(error);
