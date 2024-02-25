@@ -4,7 +4,6 @@ import * as apiClient from "../api-client";
 import { Toast } from "../components/Toast";
 import { BsBuilding, BsMap } from "react-icons/bs";
 import { BiHotel, BiMoney, BiStar } from "react-icons/bi";
-import { rupiah } from "../config/rupiah-format";
 
 const MyHotels = () => {
   const { data: hotelDatas } = useQuery(
@@ -55,8 +54,7 @@ const MyHotels = () => {
                   {hotel.type}
                 </div>
                 <div className="border border-slate-300 rounded-sm p-3 flex items-center">
-                  <BiMoney className="mr-1" />
-                  {rupiah(hotel.pricePerNight)} / night
+                  <BiMoney className="mr-1" />${hotel.pricePerNight} / night
                 </div>
                 <div className="border border-slate-300 rounded-sm p-3 flex items-center">
                   <BiHotel className="mr-1" />

@@ -4,7 +4,6 @@ import {
   UserType,
 } from "../../../../backend/src/shared/types";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { rupiah } from "../../config/rupiah-format";
 import { useSearchContext } from "../../contexts/SearchContext";
 import { useMutation } from "react-query";
 import * as apiClient from "../../api-client";
@@ -129,12 +128,9 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
 
         <div className="bg-blue-200 p-4 rounded-md">
           <div className="font-semibold text-lg">
-            Total Cost: {rupiah(paymentIntent.totalCost)}
+            Total Cost: ${paymentIntent.totalCost}
           </div>
           <div className="text-xs">Includes taxes and charges*</div>
-          <div className="text-xs text-rose-500 font-semibold">
-            Convert your payment into USD*
-          </div>
         </div>
       </div>
 

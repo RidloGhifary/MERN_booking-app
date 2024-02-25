@@ -1,5 +1,3 @@
-import { rupiah } from "../config/rupiah-format";
-
 type Props = {
   selectedPrice?: number;
   onChange: (value?: number) => void;
@@ -18,8 +16,8 @@ const PriceFilter = ({ selectedPrice, onChange }: Props) => {
           )
         }>
         <option value="">Select Max Price</option>
-        {[50000, 100000, 200000, 300000, 500000].map((price) => (
-          <option value={price}>{rupiah(price)}</option>
+        {[5, 10, 20, 30, 50].map((price) => (
+          <option value={price}>${price}</option>
         ))}
       </select>
     </div>

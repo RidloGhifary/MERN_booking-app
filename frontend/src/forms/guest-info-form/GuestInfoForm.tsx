@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
-import { rupiah } from "../../config/rupiah-format";
 import { useSearchContext } from "../../contexts/SearchContext";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -70,7 +69,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
 
   return (
     <div className="flex flex-col p-4 bg-blue-200 gap-4">
-      <h3 className="text-md font-bold">{rupiah(pricePerNight)}</h3>
+      <h3 className="text-md font-bold">${pricePerNight}</h3>
       <form
         onSubmit={
           isLoggedIn ? handleSubmit(onSubmit) : handleSubmit(onSignInClick)
