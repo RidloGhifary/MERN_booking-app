@@ -10,6 +10,7 @@ import userRoutes from "./router/users";
 import authRoutes from "./router/auth";
 import myHotelRoutes from "./router/my-hotel";
 import searchHotelRoutes from "./router/hotels";
+import myBookingsRoutes from "./router/my-bookings";
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/my-hotels", myHotelRoutes);
 app.use("/api/hotels", searchHotelRoutes);
+app.use("/api/my-bookings", myBookingsRoutes);
 
 app.get("/api/test", async (req: Request, res: Response) => {
   res.json({ message: "Hello from backend" });

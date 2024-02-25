@@ -32,7 +32,7 @@ const Header = () => {
           {isLoggedIn ? (
             <>
               <Link
-                to="/my-booking"
+                to="/my-bookings"
                 className="bg-white text-blue-700 cursor-pointer px-5 py-2 hover:bg-white/90">
                 My Bookings
               </Link>
